@@ -1,11 +1,11 @@
 # teracy-dev-certs
 
-teracy-dev extension for working with certificates related features.
+teracy-dev extension is used for certificates related related functionalities.
 
-This extension will generate self signed CA certificate and use that own CA to sign other certificates
-to be used.
+This extension will generate self signed CA certificate and use that own CA to sign other certificates.
 
-For example:
+
+For example, the generated files:
 
 ```
 $ tree workspace/certs/
@@ -19,7 +19,6 @@ workspace/certs/
 
 0 directories, 6 files
 ```
-
 
 
 ## Prerequisites
