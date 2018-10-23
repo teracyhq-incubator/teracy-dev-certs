@@ -6,8 +6,6 @@ teracy-dev-certs:
   common_name: "%{node_hostname_prefix}.%{node_domain_affix}"
   alt_names:
     - "%{node_hostname_prefix}.%{node_domain_affix}"
-    - "auth.%{node_hostname_prefix}.%{node_domain_affix}"
-    - "login.%{node_hostname_prefix}.%{node_domain_affix}"
 
   # don't try to change node_template if you don't know what you're going to do
   # node template to be overriden
