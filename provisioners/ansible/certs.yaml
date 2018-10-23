@@ -1,0 +1,48 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    # TODO(hoatle): make sure this works cross different OSes
+    - name: apt install python-openssl
+      apt: 
+        name: python-openssl
+      when: ansible_os_family == "Debian"
+
+    - name: Generate the CA private key
+      openssl_privatekey:
+        path: /vagrant/workspace/certs/ca-key.pem
+
+    - name: Generate the CA certificate signing request (CSR)
+      openssl_csr:
+        path: /vagrant/workspace/certs/ca.csr
+        privatekey_path: /vagrant/workspace/certs/ca-key.pem
+        common_name: "{{ common_name }}-ca"
+
+    - name: Generate a Self Signed CA certificate
+      openssl_certificate:
+        path: /vagrant/workspace/certs/ca.crt
+        privatekey_path: /vagrant/workspace/certs/ca-key.pem
+        csr_path: /vagrant/workspace/certs/ca.csr
+        provider: selfsigned
+
+    - name: Generate the {{ common_name}} private key
+      openssl_privatekey:
+        path: /vagrant/workspace/certs/{{ common_name }}.pem
+
+    - name: Generate the {{ common_name }} certificate signing request (CSR)
+      openssl_csr:
+        path: /vagrant/workspace/certs/{{ common_name }}.csr
+        privatekey_path: /vagrant/workspace/certs/{{ common_name }}.pem
+        common_name: "{{ common_name }}"
+        subject_alt_name: "{{ item.value | map('regex_replace', '^', 'DNS:') | list }}"
+      with_dict:
+        alt_names: "{{ alt_names }}"
+
+
+    - name: Generate the {{ common_name }} certificate signed by the self-signed CA
+      openssl_certificate:
+        path: /vagrant/workspace/certs/{{ common_name }}.crt
+        csr_path: /vagrant/workspace/certs/{{ common_name }}.csr
+        ownca_path: /vagrant/workspace/certs/ca.crt
+        ownca_privatekey_path: /vagrant/workspace/certs/ca-key.pem
+        provider: ownca

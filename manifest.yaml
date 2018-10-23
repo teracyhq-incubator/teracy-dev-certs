@@ -1,0 +1,4 @@
+name: teracy-dev-certs
+version: "0.1.0-SNAPSHOT"
+description: teracy-dev extension for working with certificates related tasks
+target: ">= 0.6.0-a4, < 0.7.0"

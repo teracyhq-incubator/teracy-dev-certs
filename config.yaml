@@ -1,0 +1,21 @@
+
+teracy-dev-certs:
+  # the node id which certs will provision
+  node_id: "0" # 0 by default from teracy-dev-core
+  ansible_mode: guest # or host to run ansible from the host machine
+  common_name: "%{node_hostname_prefix}.%{node_domain_affix}"
+  alt_names:
+    - "%{node_hostname_prefix}.%{node_domain_affix}"
+    - "auth.%{node_hostname_prefix}.%{node_domain_affix}"
+    - "login.%{node_hostname_prefix}.%{node_domain_affix}"
+
+  # don't try to change node_template if you don't know what you're going to do
+  # node template to be overriden
+  node_template:
+    _id: "0"
+    provisioners:
+      - _id: certs-ansible
+        type: ansible_local
+        verbose: -vv
+        enabled: true
+        playbook: "%{teracy-dev-certs-path}/provisioners/ansible/certs.yaml"
