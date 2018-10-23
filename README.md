@@ -82,6 +82,9 @@ teracy-dev:
       enabled: true
 ```
 
+- Then configure your specified variables by following the [Reference](#reference)
+
+- After that, `$ vagrant up --provision` or `$ vagrant provision` should generate certificates.
 
 
 ## How to trust the self-signed CA certificate
