@@ -15,5 +15,6 @@ teracy-dev-certs:
       - _id: certs-ansible
         type: ansible_local
         verbose: -vv
+        weight: 8
         enabled: true
         playbook: "%{teracy-dev-certs-path}/provisioners/ansible/certs.yaml"
