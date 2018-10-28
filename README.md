@@ -10,14 +10,13 @@ For example, the generated files:
 ```
 $ tree workspace/certs/
 workspace/certs/
-├── ca-key.pem
-├── ca.crt
-├── ca.csr
-├── node.local.crt
-├── node.local.csr
-└── node.local.pem
+├── node-local-ca-key.pem
+├── node-local-ca.crt
+├── node-local-key.pem
+├── node-local.crt
+└── node-local.csr
 
-0 directories, 6 files
+0 directories, 5 files
 ```
 
 
@@ -108,6 +107,8 @@ teracy-dev-certs:
   # the node id which certs will provision
   node_id: "0" # 0 by default from teracy-dev-core
   ansible_mode: guest # or host to run ansible from the host machine
+  ca_days: 2000 # valid days for the root CA cert
+  cert_days: 2000 # valid days for the owned CA signed cert
   common_name: "%{node_hostname_prefix}.%{node_domain_affix}"
   alt_names:
     - "%{node_hostname_prefix}.%{node_domain_affix}"
@@ -120,10 +121,12 @@ teracy-dev-certs:
   # the node id which certs will provision
   node_id: "0" # 0 by default from teracy-dev-core
   ansible_mode: host # or host to run ansible from the host machine
+  ca_days: 10000 # valid days for the root CA cert
+  cert_days: 10000 # valid days for the owned CA signed cert
   common_name: "%{node_hostname_prefix}.%{node_domain_affix}"
   alt_names:
     - "%{node_hostname_prefix}.%{node_domain_affix}"
-    - "auth.%{node_hostname_prefix}.%{node_domain_affix}"
+    - "accounts.%{node_hostname_prefix}.%{node_domain_affix}"
     - "login.%{node_hostname_prefix}.%{node_domain_affix}"
 ```
 

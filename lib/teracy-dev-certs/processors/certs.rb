@@ -37,7 +37,10 @@ module TeracyDevCerts
         ansible_type = "ansible" if certs_config['ansible_mode'] == 'host'
         extra_vars = {
           "common_name" => certs_config['common_name'],
-          "alt_names" => certs_config['alt_names']
+          "alt_names" => certs_config['alt_names'],
+          "ca_days" => certs_config['ca_days'],
+          "cert_days" => certs_config['cert_days'],
+          "certs_path" => '/vagrant/workspace/certs'
         }
         node = {
           "_id" => certs_config['node_id'],
