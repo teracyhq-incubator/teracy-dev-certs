@@ -14,6 +14,7 @@ teracy-dev-certs:
     provisioners:
       - _id: certs-ansible
         type: ansible_local
+        name: teracy-dev-certs
         verbose: -vv
         weight: 8
         enabled: true
