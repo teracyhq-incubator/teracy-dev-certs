@@ -88,7 +88,7 @@ teracy-dev:
 
 ## How to trust the self-signed CA certificate
 
-- The root CA certificate is generated at the `workspace/certs/ca.crt` and you must add this certificate
+- The root CA certificate is generated at the `workspace/certs/<common_name>-ca.crt` and you must add this certificate
   as trusted on the running systems
 
 - See:
