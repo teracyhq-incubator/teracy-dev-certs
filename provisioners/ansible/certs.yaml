@@ -10,29 +10,26 @@
 
     - name: Generate the CA private key
       openssl_privatekey:
-        path: /vagrant/workspace/certs/ca-key.pem
+        path: "{{ certs_path }}/{{ common_name | replace('.', '-') }}-ca-key.pem"
 
-    - name: Generate the CA certificate signing request (CSR)
-      openssl_csr:
-        path: /vagrant/workspace/certs/ca.csr
-        privatekey_path: /vagrant/workspace/certs/ca-key.pem
-        common_name: "{{ common_name }}-ca"
+    - stat: path={{ certs_path }}/{{ common_name | replace('.', '-') }}-ca.crt
+      register: ca_crt_file
 
     - name: Generate a Self Signed CA certificate
-      openssl_certificate:
-        path: /vagrant/workspace/certs/ca.crt
-        privatekey_path: /vagrant/workspace/certs/ca-key.pem
-        csr_path: /vagrant/workspace/certs/ca.csr
-        provider: selfsigned
+      shell: openssl req -x509 -new -nodes -key {{ common_name | replace('.', '-') }}-ca-key.pem -days {{ ca_days }} -out {{ common_name | replace('.', '-') }}-ca.crt -subj "/CN={{ common_name | replace('.', '-') }}-ca"
+      args:
+        chdir: "{{ certs_path }}"
+      when: ca_crt_file.stat.exists == False
 
-    - name: Generate the {{ common_name}} private key
+    - name: Generate the {{ common_name }} private key
       openssl_privatekey:
-        path: /vagrant/workspace/certs/{{ common_name }}.pem
+        path: "{{ certs_path }}/{{ common_name | replace('.', '-') }}-key.pem"
+
 
     - name: Generate the {{ common_name }} certificate signing request (CSR)
       openssl_csr:
-        path: /vagrant/workspace/certs/{{ common_name }}.csr
-        privatekey_path: /vagrant/workspace/certs/{{ common_name }}.pem
+        path: "{{ certs_path }}/{{ common_name | replace('.', '-') }}.csr"
+        privatekey_path: "{{ certs_path }}/{{ common_name | replace('.', '-') }}-key.pem"
         common_name: "{{ common_name }}"
         subject_alt_name: "{{ item.value | map('regex_replace', '^', 'DNS:') | list }}"
       with_dict:
@@ -41,8 +38,9 @@
 
     - name: Generate the {{ common_name }} certificate signed by the self-signed CA
       openssl_certificate:
-        path: /vagrant/workspace/certs/{{ common_name }}.crt
-        csr_path: /vagrant/workspace/certs/{{ common_name }}.csr
-        ownca_path: /vagrant/workspace/certs/ca.crt
-        ownca_privatekey_path: /vagrant/workspace/certs/ca-key.pem
+        path: "{{ certs_path }}/{{ common_name | replace('.', '-') }}.crt"
+        csr_path: "{{ certs_path }}/{{ common_name | replace('.', '-') }}.csr"
+        ownca_path: "{{ certs_path }}/{{ common_name | replace('.', '-') }}-ca.crt"
+        ownca_privatekey_path: "{{ certs_path }}/{{ common_name | replace('.', '-') }}-ca-key.pem"
+        valid_in: "{{ cert_days*24*60*60 }}"  # seconds
         provider: ownca
