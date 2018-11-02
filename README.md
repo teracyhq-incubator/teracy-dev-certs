@@ -97,7 +97,69 @@ teracy-dev:
   + https://portal.threatpulse.com/docs/sol/Solutions/ManagePolicy/SSL/ssl_firefox_cert_ta.htm 
 
 
-## Reference
+## Useful openssl commands
+
+We can use the following useful commands to check and verify the generated files.
+
+### Check a private key
+
+For example:
+
+```bash
+$ cd workspace/certs
+$ openssl rsa -check -in node-local-ca-key.pem
+$ openssl rsa -check -in node-local-key.pem
+```
+
+### Check a certificate
+
+For example:
+
+```bash
+$ cd workspace/certs
+$ openssl x509 -text -noout -in node-local-ca.crt
+$ openssl x509 -text -noout -in node-local.crt
+```
+
+### Check a Certificate Signing Request (CSR)
+
+For example:
+
+```bash
+$ cd workspace/certs
+$ openssl req -text -noout -verify -in node-local.csr
+```
+
+### Check an MD5 hash of the public key to ensure that it matches with what is in a CSR or private key
+
+For example:
+
+```bash
+$ cd workspace/certs
+$ # root CA
+$ openssl x509 -noout -modulus -in node-local-ca.crt | openssl md5
+$ openssl rsa -noout -modulus -in node-local-ca-key.pem | openssl md5
+$ # cert signed by the root CA
+$ openssl x509 -noout -modulus -in node-local.crt | openssl md5
+$ openssl rsa -noout -modulus -in node-local-key.pem | openssl md5
+$ openssl req -noout -modulus -in node-local.csr | openssl md5
+```
+
+### Check an SSL connection. All the certificates (including Intermediates) should be displayed
+
+For example:
+
+```bash
+$ openssl s_client -connect node.local:443
+```
+
+
+- See more:
+
+  + https://www.sslshopper.com/article-most-common-openssl-commands.html
+
+
+## Configuration Reference
 
 You can override the following configuration variables on the
 `workspace/teracy-dev-entry/config_override.yaml` file:
