@@ -183,7 +183,7 @@ teracy-dev-certs:
 
 - The `host` mode: users need to install ansible into their host machine.
 
-For example, this configuration specifies the `host` mode for ansible running.
+For example, this configuration specifies the `host` mode to run ansible.
 
 ```yaml
 teracy-dev-certs:
