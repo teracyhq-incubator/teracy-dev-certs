@@ -150,7 +150,8 @@ $ openssl req -noout -modulus -in node-local.csr | openssl md5
 For example:
 
 ```bash
-$ openssl s_client -connect node.local:443
+$ cd workspace/certs
+$ openssl s_client -connect node.local:443 -CAfile node-local-ca.crt
 ```
 
 
