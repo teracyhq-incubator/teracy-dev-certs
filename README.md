@@ -177,7 +177,13 @@ teracy-dev-certs:
     - "%{node_hostname_prefix}.%{node_domain_affix}"
 ```
 
-For example:
+`ansible` has 2 modes: 
+
+- The `guest` mode (default): ansible is automatically installed in the VM machine by vagrant.
+
+- The `host` mode: users need to install ansible into their host machine.
+
+For example, this configuration specifies the `host` mode to run ansible.
 
 ```yaml
 teracy-dev-certs:
