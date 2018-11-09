@@ -179,13 +179,11 @@ teracy-dev-certs:
 
 `ansible` has 2 modes: 
 
-- The `guest` mode (default) which is automatically installed in VM by vagrant. Its certificate is valid in 2000 days
-and for only 1 domain.
+- The `guest` mode (default): ansible is automatically installed in the VM machine by vagrant.
 
-- The `host` mode which users need to install from the host machine. Its certificate is valid in 10000 days and for 2 additional domains, including `account` and `login`.
+- The `host` mode: users need to install ansible into their host machine.
 
-
-For example: this configuration is running in the `host` mode.
+For example, this configuration specifies the `host` mode for ansible running.
 
 ```yaml
 teracy-dev-certs:
