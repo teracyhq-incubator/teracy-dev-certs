@@ -84,7 +84,7 @@ teracy-dev:
           remote:
             origin: https://github.com/teracyhq-incubator/teracy-dev-certs.git
           branch: develop
-      require_version: ">= 0.1.0-SNAPSHOT"
+      require_version: ">= 0.2.0-SNAPSHOT"
       enabled: true
 ```
 
@@ -225,5 +225,5 @@ teracy-dev:
             origin: git@github.com:hoatle/teracy-dev-certs.git # your forked repo
             upstream: git@github.com:teracyhq-incubator/teracy-dev-certs.git
         branch: develop
-      require_version: ">= 0.1.0-SNAPSHOT"
+      require_version: ">= 0.2.0-SNAPSHOT"
 ```
