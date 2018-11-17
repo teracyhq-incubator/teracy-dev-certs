@@ -24,7 +24,8 @@ workspace/certs/
 
 - Vagrant >= 2.1, VirtualBox >= 5.2
 - Ansible >= 2.7 if you're running Ansible on the host machine
-- teracy-dev v0.6
+- teracy-dev >= 0.6.0-a5, < 0.7.0
+- teracy-dev-core >= 0.4.0
 
 
 ## Supported Guest Operating System
@@ -45,8 +46,10 @@ teracy-dev:
       path:
         extension: teracy-dev-certs
       location:
-        git: https://github.com/teracyhq-incubator/teracy-dev-certs.git
-        branch: v0.1.0
+        git:
+          remote:
+            origin: https://github.com/teracyhq-incubator/teracy-dev-certs.git
+          branch: v0.1.0
       require_version: ">= 0.1.0"
       enabled: true
 ```
@@ -60,8 +63,10 @@ teracy-dev:
       path:
         extension: teracy-dev-certs
       location:
-        git: https://github.com/teracyhq-incubator/teracy-dev-certs.git
-        branch: master
+        git:
+          remote:
+            origin: https://github.com/teracyhq-incubator/teracy-dev-certs.git
+          branch: master
       require_version: ">= 0.1.0"
       enabled: true
 ```
@@ -75,8 +80,10 @@ teracy-dev:
       path:
         extension: teracy-dev-certs
       location:
-        git: https://github.com/teracyhq-incubator/teracy-dev-certs.git
-        branch: develop
+        git:
+          remote:
+            origin: https://github.com/teracyhq-incubator/teracy-dev-certs.git
+          branch: develop
       require_version: ">= 0.1.0-SNAPSHOT"
       enabled: true
 ```
@@ -213,7 +220,10 @@ teracy-dev:
       path:
         lookup: workspace # use workspace directory to lookup for this extension
       location:
-        git: git@github.com:hoatle/teracy-dev-certs.git # your forked repo
+        git:
+          remote:
+            origin: git@github.com:hoatle/teracy-dev-certs.git # your forked repo
+            upstream: git@github.com:teracyhq-incubator/teracy-dev-certs.git
         branch: develop
       require_version: ">= 0.1.0-SNAPSHOT"
 ```
