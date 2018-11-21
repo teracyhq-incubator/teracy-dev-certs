@@ -176,7 +176,9 @@ You can override the following configuration variables on the
 teracy-dev-certs:
   # the node id which certs will provision
   node_id: "0" # 0 by default from teracy-dev-core
-  ansible_mode: guest # or host to run ansible from the host machine
+  ansible
+    mode: guest # or host to run ansible from the host machine
+    install_mode: pip
   ca_days: 2000 # valid days for the root CA cert
   cert_days: 2000 # valid days for the owned CA signed cert
   common_name: "%{node_hostname_prefix}.%{node_domain_affix}"
@@ -196,7 +198,8 @@ For example, this configuration specifies the `host` mode to run ansible.
 teracy-dev-certs:
   # the node id which certs will provision
   node_id: "0" # 0 by default from teracy-dev-core
-  ansible_mode: host # or host to run ansible from the host machine
+  ansible
+    mode: host # or host to run ansible from the host machine
   ca_days: 10000 # valid days for the root CA cert
   cert_days: 10000 # valid days for the owned CA signed cert
   common_name: "%{node_hostname_prefix}.%{node_domain_affix}"
