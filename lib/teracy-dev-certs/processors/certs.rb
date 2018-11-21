@@ -33,7 +33,7 @@ module TeracyDevCerts
       end
 
       def generate_node(certs_config)
-        if TeracyDev::Util.exist?(certs_config['ansible_mode']) and !TeracyDev::Util.exist?(certs_config['ansible']['mode'])
+        if TeracyDev::Util.exist?(certs_config['ansible_mode'])
           certs_config['ansible']['mode'] = certs_config['ansible_mode']
           @logger.warn("ansible_mode is deprecated, please use ansible.mode instead")
         end
@@ -49,19 +49,16 @@ module TeracyDevCerts
         }
 
         if certs_config['ansible']['mode'] == 'guest'
-          ansible_install_mode = certs_config['ansible']['install_mode']
-          ansible_install_mode = 'pip' unless TeracyDev::Util.exist?(certs_config['ansible']['install_mode'])
-
-          ansible_install_version = certs_config['ansible']['version']
-          ansible_install_version = 'latest' unless TeracyDev::Util.exist?(certs_config['ansible']['version'])
 
           provisioner = {
             "_id" => "certs-ansible",
             "type" => ansible_type,
-            "extra_vars" => extra_vars,
-            "install_mode" => ansible_install_mode,
-            "version" => ansible_install_version
+            "extra_vars" => extra_vars
           }
+          ansible_install_mode = certs_config['ansible']['install_mode']
+          provisioner['install_mode'] = ansible_install_mode if TeracyDev::Util.exist? ansible_install_mode
+          ansible_version = certs_config['ansible']['version']
+          provisioner['version'] = ansible_version if TeracyDev::Util.exist? ansible_version
         elsif certs_config['ansible']['mode'] == 'host'
           provisioner = {
             "_id" => "certs-ansible",
