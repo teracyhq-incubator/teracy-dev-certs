@@ -10,9 +10,19 @@ module TeracyDevCerts
       def process(settings)
         @logger.debug("settings: #{settings}")
         certs_config = settings['teracy-dev-certs']
-        # make sure node_id exists
         node_id = certs_config['node_id']
         node = settings['nodes'].find { |node| node['_id'] == node_id }
+        # try with _id_deprecated
+        if node == nil
+          node = settings['nodes'].find { |node| node['_id_deprecated'] == node_id }
+          # this works well with teracy-dev-core >= v0.4.0 (when its _id is changed on v0.5.0)
+          # update certs_config['node_id'] to use the _id, not _id_deprecated to avoid warning message
+          @logger.debug("node: #{node}")
+          if node != nil
+            certs_config['node_id'] = node['_id']
+          end
+        end
+        # make sure node with its specified id (node_id) exists
         if node == nil
           @logger.error("node not found for node_id: #{node_id}")
           abort
