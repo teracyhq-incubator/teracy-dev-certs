@@ -31,7 +31,10 @@ workspace/certs/
 ## Supported Guest Operating System
 
 - Ubuntu
-
+- Debian
+- RedHat
+- Fedora
+- FreeBSD
 
 ## How to use
 
@@ -101,7 +104,7 @@ teracy-dev:
 - See:
   + http://wiki.cacert.org/FAQ/ImportRootCert
   + http://www.robpeck.com/2010/10/google-chrome-mac-os-x-and-self-signed-ssl-certificates/#.W88C1hMzab8
-  + https://portal.threatpulse.com/docs/sol/Solutions/ManagePolicy/SSL/ssl_firefox_cert_ta.htm 
+  + https://portal.threatpulse.com/docs/sol/Solutions/ManagePolicy/SSL/ssl_firefox_cert_ta.htm
 
 
 ## Useful openssl commands
@@ -186,7 +189,7 @@ teracy-dev-certs:
     - "%{node_hostname_prefix}.%{node_domain_affix}"
 ```
 
-`ansible` has 2 modes: 
+`ansible` has 2 modes:
 
 - The `guest` mode (default): ansible is automatically installed in the VM machine by vagrant.
 
