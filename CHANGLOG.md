@@ -1,5 +1,15 @@
 # Change Log
 
+## [v0.3.0][] (2018-12-07)
+
+- Improvements:
+  + should support as much guest OSes as possible #1
+
+- Bug Fixes:
+  + should fix the bug with upcoming updated id from teracy-dev-core #21
+
+Details: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/3?closed=1
+
 
 ## [v0.2.0][] (2018-11-21)
 
@@ -25,3 +35,4 @@ Details: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/1?clos
 
 [v0.1.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/1?closed=1
 [v0.2.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/2?closed=1
+[v0.3.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/3?closed=1
