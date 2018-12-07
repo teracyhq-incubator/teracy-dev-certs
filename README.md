@@ -52,8 +52,8 @@ teracy-dev:
         git:
           remote:
             origin: https://github.com/teracyhq-incubator/teracy-dev-certs.git
-          branch: v0.2.0
-      require_version: ">= 0.2.0"
+          branch: v0.3.0
+      require_version: ">= 0.3.0"
       enabled: true
 ```
 
@@ -70,7 +70,7 @@ teracy-dev:
           remote:
             origin: https://github.com/teracyhq-incubator/teracy-dev-certs.git
           branch: master
-      require_version: ">= 0.2.0"
+      require_version: ">= 0.3.0"
       enabled: true
 ```
 
@@ -87,7 +87,7 @@ teracy-dev:
           remote:
             origin: https://github.com/teracyhq-incubator/teracy-dev-certs.git
           branch: develop
-      require_version: ">= 0.3.0-SNAPSHOT"
+      require_version: ">= 0.4.0-SNAPSHOT"
       enabled: true
 ```
 
@@ -231,5 +231,5 @@ teracy-dev:
             origin: git@github.com:hoatle/teracy-dev-certs.git # your forked repo
             upstream: git@github.com:teracyhq-incubator/teracy-dev-certs.git
         branch: develop
-      require_version: ">= 0.3.0-SNAPSHOT"
+      require_version: ">= 0.4.0-SNAPSHOT"
 ```
