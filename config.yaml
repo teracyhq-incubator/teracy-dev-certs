@@ -7,7 +7,9 @@ teracy-dev-certs:
     install_mode: pip
     version: # ansible guest version
   ca_days: 2000 # valid days for the root CA cert
-  cert_days: 2000 # valid days for the owned CA signed cert
+  cert:
+    days: 2000
+    generated: true # enabled by default to generate a CA signed certificate
   common_name: "%{node_hostname_prefix}.%{node_domain_affix}"
   alt_names:
     - "%{node_hostname_prefix}.%{node_domain_affix}"

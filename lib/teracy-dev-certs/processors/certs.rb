@@ -1,6 +1,7 @@
 require 'fileutils'
 
 require 'teracy-dev'
+require 'teracy-dev/util'
 require 'teracy-dev/processors/processor'
 
 module TeracyDevCerts
@@ -54,36 +55,52 @@ module TeracyDevCerts
           "common_name" => certs_config['common_name'],
           "alt_names" => certs_config['alt_names'],
           "ca_days" => certs_config['ca_days'],
-          "cert_days" => certs_config['cert_days'],
           "certs_path" => '/vagrant/workspace/certs'
         }
 
-        if certs_config['ansible']['mode'] == 'guest'
+        if TeracyDev::Util.exist?(certs_config['cert_days'])
+          certs_config['cert']['days'] = certs_config['cert_days']
 
-          provisioner = {
-            "_id" => "certs-ansible",
-            "type" => ansible_type,
-            "extra_vars" => extra_vars
-          }
+          @logger.warn("cert_days is deprecated, please use cert.days instead")
+        end
+
+        extra_vars['cert_days'] = certs_config['cert']['days']
+
+        if TeracyDev::Util.exist? certs_config['cert']['generated'] and TeracyDev::Util.true? certs_config['cert']['generated']
+          certs_config['cert']['generated'] = true
+        else
+          certs_config['cert']['generated'] = false
+        end
+
+        extra_vars['cert_generated'] = certs_config['cert']['generated']
+
+        provisioner = {
+          "_id" => "certs-ansible",
+          "type" => ansible_type,
+          "extra_vars" => extra_vars
+        }
+
+        if certs_config['ansible']['mode'] == 'guest'
           ansible_install_mode = certs_config['ansible']['install_mode']
+
           provisioner['install_mode'] = ansible_install_mode if TeracyDev::Util.exist? ansible_install_mode
+
           ansible_version = certs_config['ansible']['version']
+
           provisioner['version'] = ansible_version if TeracyDev::Util.exist? ansible_version
-        elsif certs_config['ansible']['mode'] == 'host'
-          provisioner = {
-            "_id" => "certs-ansible",
-            "type" => ansible_type,
-            "extra_vars" => extra_vars
-          }
         end
 
         node = {
           "_id" => certs_config['node_id'],
           "provisioners" => [provisioner]
         }
+
         node_template = certs_config['node_template']
+
         node = TeracyDev::Util.override(node_template, node)
+
         @logger.debug("node: #{node}")
+
         node
       end
     end
