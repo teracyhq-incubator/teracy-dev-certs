@@ -6,7 +6,9 @@ teracy-dev-certs:
     mode: guest # or host to run ansible from the host machine
     install_mode: pip
     version: # ansible guest version
-  ca_days: 2000 # valid days for the root CA cert
+  ca:
+    days: 2000 # valid days for the root CA cert
+    pkcs1_generated: false # to generate the PKCS#1 *-ca.key from the *-ca-key.pem file
   cert:
     days: 2000
     generated: true # enabled by default to generate a CA signed certificate
