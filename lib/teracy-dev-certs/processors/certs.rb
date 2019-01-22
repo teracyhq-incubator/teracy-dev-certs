@@ -54,7 +54,6 @@ module TeracyDevCerts
         extra_vars = {
           "common_name" => certs_config['common_name'],
           "alt_names" => certs_config['alt_names'],
-          "ca_days" => certs_config['ca_days'],
           "certs_path" => '/vagrant/workspace/certs'
         }
 
@@ -64,15 +63,19 @@ module TeracyDevCerts
           @logger.warn("cert_days is deprecated, please use cert.days instead")
         end
 
-        extra_vars['cert_days'] = certs_config['cert']['days']
+        if TeracyDev::Util.exist?(certs_config['ca_days'])
+          certs_config['ca']['days'] = certs_config['ca_days']
 
-        if TeracyDev::Util.exist? certs_config['cert']['generated'] and TeracyDev::Util.true? certs_config['cert']['generated']
-          certs_config['cert']['generated'] = true
-        else
-          certs_config['cert']['generated'] = false
+          @logger.warn("ca_days is deprecated, please use ca.days instead")
         end
 
-        extra_vars['cert_generated'] = certs_config['cert']['generated']
+        extra_vars['cert_days'] = certs_config['cert']['days']
+
+        extra_vars['ca_days'] = certs_config['ca']['days']
+
+        extra_vars['cert_generated'] = TeracyDev::Util.true? certs_config['cert']['generated']
+
+        extra_vars['pkcs1_generated'] = TeracyDev::Util.true? certs_config['ca']['pkcs1_generated']
 
         provisioner = {
           "_id" => "certs-ansible",
