@@ -182,8 +182,12 @@ teracy-dev-certs:
   ansible
     mode: guest # or host to run ansible from the host machine
     install_mode: pip
-  ca_days: 2000 # valid days for the root CA cert
-  cert_days: 2000 # valid days for the owned CA signed cert
+  ca:
+    days: 2000 # valid days for the root CA cert
+    pkcs1_generated: false # to generate the PKCS#1 *-ca.key from the *-ca-key.pem file
+  cert:
+    days: 2000 # valid days for the owned CA signed cert
+    generated: true # enabled by default to generate the owned CA signed cert
   common_name: "%{node_hostname_prefix}.%{node_domain_affix}"
   alt_names:
     - "%{node_hostname_prefix}.%{node_domain_affix}"
@@ -195,7 +199,7 @@ teracy-dev-certs:
 
 - The `host` mode: users need to install ansible into their host machine.
 
-For example, this configuration specifies the `host` mode to run ansible.
+For example, this configuration specifies the `host` mode to run ansible with other options.
 
 ```yaml
 teracy-dev-certs:
@@ -203,8 +207,10 @@ teracy-dev-certs:
   node_id: "0" # 0 by default from teracy-dev-core
   ansible
     mode: host # or host to run ansible from the host machine
-  ca_days: 10000 # valid days for the root CA cert
-  cert_days: 10000 # valid days for the owned CA signed cert
+  ca:
+    days: 10000 # valid days for the root CA cert
+  cert:
+    days: 10000 # valid days for the owned CA signed cert
   common_name: "%{node_hostname_prefix}.%{node_domain_affix}"
   alt_names:
     - "%{node_hostname_prefix}.%{node_domain_affix}"
