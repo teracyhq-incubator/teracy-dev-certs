@@ -1,5 +1,13 @@
 # Change Log
 
+## [v0.4.0][] (2018-01-22)
+
+- Improvements:
+  + should add `cert.generated: true` option to enable/disable cert generation #23
+  + should add `ca.pkcs1_generated: false` to disable/enable the generation of PKCS#1 format #27
+
+Details: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/4?closed=1
+
 ## [v0.3.0][] (2018-12-07)
 
 - Improvements:
@@ -36,3 +44,4 @@ Details: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/1?clos
 [v0.1.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/1?closed=1
 [v0.2.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/2?closed=1
 [v0.3.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/3?closed=1
+[v0.4.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/4?closed=1
