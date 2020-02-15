@@ -71,7 +71,7 @@
         csr_path: "{{ certs_path }}/{{ common_name | replace('.', '-') }}.csr"
         ownca_path: "{{ certs_path }}/{{ common_name | replace('.', '-') }}-ca.crt"
         ownca_privatekey_path: "{{ certs_path }}/{{ common_name | replace('.', '-') }}-ca-key.pem"
-        valid_in: "{{ cert_days*24*60*60 }}"  # seconds
+        ownca_not_after: "+{{ cert_days }}d"
         provider: ownca
       when: cert_generated
 
