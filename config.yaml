@@ -10,7 +10,7 @@ teracy-dev-certs:
     days: 2000 # valid days for the root CA cert
     pkcs1_generated: false # to generate the PKCS#1 *-ca.key from the *-ca-key.pem file
   cert:
-    days: 2000 # valid days for the owned CA signed cert
+    days: 825 # valid days for the owned CA signed cert
     generated: true # enabled by default to generate the owned CA signed cert
   common_name: "%{node_hostname_prefix}.%{node_domain_affix}"
   alt_names:
