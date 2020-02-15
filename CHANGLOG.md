@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.5.0][] (2020-02-16)
+
+- Bug Fixes:
+  + should fix the cert days signed by the self signed root CA #32
+
+Details: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/5?closed=1
+
 ## [v0.4.0][] (2018-01-22)
 
 - Improvements:
@@ -45,3 +52,4 @@ Details: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/1?clos
 [v0.2.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/2?closed=1
 [v0.3.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/3?closed=1
 [v0.4.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/4?closed=1
+[v0.5.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/5?closed=1
