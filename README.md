@@ -52,8 +52,8 @@ teracy-dev:
         git:
           remote:
             origin: https://github.com/teracyhq-incubator/teracy-dev-certs.git
-          branch: v0.4.0
-      require_version: ">= 0.4.0"
+          branch: v0.5.0
+      require_version: ">= 0.5.0"
       enabled: true
 ```
 
@@ -70,7 +70,7 @@ teracy-dev:
           remote:
             origin: https://github.com/teracyhq-incubator/teracy-dev-certs.git
           branch: master
-      require_version: ">= 0.4.0"
+      require_version: ">= 0.5.0"
       enabled: true
 ```
 
@@ -87,7 +87,7 @@ teracy-dev:
           remote:
             origin: https://github.com/teracyhq-incubator/teracy-dev-certs.git
           branch: develop
-      require_version: ">= 0.5.0-SNAPSHOT"
+      require_version: ">= 0.6.0-SNAPSHOT"
       enabled: true
 ```
 
@@ -186,7 +186,7 @@ teracy-dev-certs:
     days: 2000 # valid days for the root CA cert
     pkcs1_generated: false # to generate the PKCS#1 *-ca.key from the *-ca-key.pem file
   cert:
-    days: 2000 # valid days for the owned CA signed cert
+    days: 825 # valid days for the owned CA signed cert
     generated: true # enabled by default to generate the owned CA signed cert
   common_name: "%{node_hostname_prefix}.%{node_domain_affix}"
   alt_names:
@@ -208,9 +208,9 @@ teracy-dev-certs:
   ansible
     mode: host # or host to run ansible from the host machine
   ca:
-    days: 10000 # valid days for the root CA cert
+    days: 3000 # valid days for the root CA cert
   cert:
-    days: 10000 # valid days for the owned CA signed cert
+    days: 825 # valid days for the owned CA signed cert
   common_name: "%{node_hostname_prefix}.%{node_domain_affix}"
   alt_names:
     - "%{node_hostname_prefix}.%{node_domain_affix}"
@@ -237,5 +237,5 @@ teracy-dev:
             origin: git@github.com:hoatle/teracy-dev-certs.git # your forked repo
             upstream: git@github.com:teracyhq-incubator/teracy-dev-certs.git
         branch: develop
-      require_version: ">= 0.5.0-SNAPSHOT"
+      require_version: ">= 0.6.0-SNAPSHOT"
 ```
