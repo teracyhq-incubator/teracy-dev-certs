@@ -52,8 +52,8 @@ teracy-dev:
         git:
           remote:
             origin: https://github.com/teracyhq-incubator/teracy-dev-certs.git
-          branch: v0.5.0
-      require_version: ">= 0.5.0"
+          branch: v0.5.1
+      require_version: ">= 0.5.1"
       enabled: true
 ```
 
@@ -70,7 +70,7 @@ teracy-dev:
           remote:
             origin: https://github.com/teracyhq-incubator/teracy-dev-certs.git
           branch: master
-      require_version: ">= 0.5.0"
+      require_version: ">= 0.5.1"
       enabled: true
 ```
 
