@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.5.1][] (2021-06-08)
+
+- Bug Fixes:
+  + fix python 2.7 #38
+
+Details: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/7?closed=1
+
 ## [v0.5.0][] (2020-02-16)
 
 - Bug Fixes:
@@ -53,3 +60,5 @@ Details: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/1?clos
 [v0.3.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/3?closed=1
 [v0.4.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/4?closed=1
 [v0.5.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/5?closed=1
+[v0.5.1]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/7?closed=1
+

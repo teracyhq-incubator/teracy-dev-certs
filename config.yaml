@@ -6,6 +6,7 @@ teracy-dev-certs:
     mode: guest # or host to run ansible from the host machine
     install_mode: pip
     version: # ansible guest version
+    pip_install_cmd: curl https://bootstrap.pypa.io/pip/2.7/get-pip.py | sudo python
   ca:
     days: 2000 # valid days for the root CA cert
     pkcs1_generated: false # to generate the PKCS#1 *-ca.key from the *-ca-key.pem file
