@@ -91,6 +91,10 @@ module TeracyDevCerts
           ansible_version = certs_config['ansible']['version']
 
           provisioner['version'] = ansible_version if TeracyDev::Util.exist? ansible_version
+
+          pip_install_cmd = certs_config['ansible']['pip_install_cmd']
+
+          provisioner['pip_install_cmd'] = pip_install_cmd if TeracyDev::Util.exist? pip_install_cmd
         end
 
         node = {
