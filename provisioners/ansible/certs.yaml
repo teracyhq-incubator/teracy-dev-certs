@@ -5,37 +5,90 @@
   vars:
     cert_generated: "{{ cert_generated }}"
     pkcs1_generated: "{{ pkcs1_generated }}"
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
-    - name: Check pip exists
-      command: which pip
-      register: pip_exist
+    - name: Check pip3 exists
+      command: pip3 --version
+      register: pip3_exist
       ignore_errors: True
+      changed_when: false
 
-    - name: Download get-pip.py
+    - name: Check python3 version
+      command: python3 --version
+      register: python3_version
+      changed_when: false
+
+    - name: Set python3 version fact
+      set_fact:
+        python3_major_minor: "{{ python3_version.stdout.split()[1] | regex_replace('^(\\d+\\.\\d+).*$', '\\1') }}"
+
+    - name: Install python3-pip from apt (Ubuntu 20.04+ / Debian 11+)
+      apt:
+        name: python3-pip
+        state: present
+        update_cache: yes
+      when:
+        - pip3_exist is failed
+        - ansible_facts['os_family'] == "Debian"
+
+    - name: Re-check pip3 exists after apt install
+      command: pip3 --version
+      register: pip3_after_apt
+      ignore_errors: True
+      changed_when: false
+      when: pip3_exist is failed
+
+    - name: Install python3-distutils from apt (for version-specific get-pip.py support)
+      apt:
+        name: python3-distutils
+        state: present
+        update_cache: yes
+      when:
+        - pip3_exist is failed
+        - pip3_after_apt is failed
+        - ansible_facts['os_family'] == "Debian"
+
+    - name: Download version-specific get-pip.py
       get_url:
-        url: https://bootstrap.pypa.io/2.7/get-pip.py
+        url: "https://bootstrap.pypa.io/pip/{{ python3_major_minor }}/get-pip.py"
         dest: /tmp/get-pip.py
         mode: 0755
-      when: pip_exist is failed
+      when:
+        - pip3_exist is failed
+        - pip3_after_apt is failed
 
-    - stat: path=/tmp/get-pip.py
+    - name: Check get-pip.py downloaded
+      stat:
+        path: /tmp/get-pip.py
       register: stat_pip_result
-      when: pip_exist is failed
+      when:
+        - pip3_exist is failed
+        - pip3_after_apt is failed
 
-    - name: Install pip
-      command: python /tmp/get-pip.py
+    - name: Install pip via version-specific get-pip.py
+      command: python3 /tmp/get-pip.py
       register: pip_install
       when:
-        - pip_exist is failed
-        - stat_pip_result.stat.exists == True
+        - pip3_exist is failed
+        - pip3_after_apt is failed
+        - stat_pip_result.stat.exists
 
-    - debug:
+    - name: Debug pip install result
+      debug:
         msg: "pip has been installed"
-      when: (pip_install is succeeded) or (pip_exist is succeeded)
+      when: (pip_install is succeeded) or (pip3_exist is succeeded) or (pip3_after_apt is succeeded)
 
-    - name: Install python-openssl
+    - name: Install python3-openssl from apt (Debian/Ubuntu)
+      apt:
+        name: python3-openssl
+        state: present
+      when: ansible_facts['os_family'] == "Debian"
+
+    - name: Install python-openssl via pip (non-Debian)
       pip:
         name: pyOpenSSL
+        executable: pip3
+      when: ansible_facts['os_family'] != "Debian"
 
     - name: Generate the CA private key
       openssl_privatekey:
