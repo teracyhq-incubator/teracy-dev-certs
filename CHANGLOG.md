@@ -1,5 +1,13 @@
 # Change Log
 
+## [v0.6.0][] (2026-05-26)
+
+- Improvements:
+  + should add support for python3 and newer ubuntu versions #41
+  + should set default certs day to be 398 days #36
+
+Details: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/6?closed=1
+
 ## [v0.5.1][] (2021-06-08)
 
 - Bug Fixes:
@@ -61,4 +69,5 @@ Details: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/1?clos
 [v0.4.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/4?closed=1
 [v0.5.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/5?closed=1
 [v0.5.1]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/7?closed=1
+[v0.6.0]: https://github.com/teracyhq-incubator/teracy-dev-certs/milestone/6?closed=1
 
